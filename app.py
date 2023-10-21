@@ -28,4 +28,4 @@ def generate_token():
     # create a Sync grant and add to token
     sync_grant = SyncGrant(sync_service_sid)
     token.add_grant(sync_grant)
-    return jsonify(identity=username, token=token.to_jwt().decode())
+    return jsonify(identity=username, token=token.to_jwt().decode() if isinstance(token.to_jwt(), bytes) else token.to_jwt())
